@@ -1,0 +1,36 @@
+<%- layout("./layouts/main") %>
+<div class="container">
+    <div class="row">
+        <div class="col-md-5">
+            <div class="card">
+            <div class="card-header">
+                Profile
+            </div>
+            <div class="card-body">
+                <h5 class="card-title"><%= user.email %></h5>
+                <p class="card-text"><%= user.password %></p>
+                <a href="/logout" class="btn btn-outline-danger">Logout</a>
+            </div>
+            </div>
+        </div>
+        <div class="col-md-7">
+            <div class="card">
+                <div class="card-header">
+                    Edit profile
+                </div>
+                <div class="card-body">
+                    <form action="/update-profile" method="post">
+                         <input type="hidden" name="_id" value=<%= user._id %> >
+                        <div class="form-group">
+                            <input type="email" class="form-control" name="email" value=<%= user.email %> >
+                        </div>
+                        <div class="form-group">
+                            <input type="password" class="form-control" name="password" placeholder="New password">
+                        </div>
+                        <button type="submit" class="btn btn-outline-primary btn-block">Update profile</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

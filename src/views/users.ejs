@@ -1,0 +1,44 @@
+<%- layout('./layouts/main') %>
+<div class="row">
+    <div class="<% if(userEdit) { %> col-md-8 <% } else { %> col-md-12 <% } %>">
+        <div class="list-group">
+        <div class="list-group-item list-group-item-action active">
+        List Users
+        </div>
+        <% users.map((user,index) => { %>
+        <div class="list-group-item list-group-item-action">
+            <div class="d-flex w-100 justify-content-between">
+                <h5 class="mb-1"><%= user.email %></h5>
+                <small>
+                    <a class="btn btn-sm btn-outline-primary" href="/users/<%= user._id %>">Edit</a>
+                    <a class="btn btn-sm btn-outline-danger" href="/delete/user/<%= user._id %>">Delete</a>
+                </small>
+            </div>
+            <p class="mb-1"><%= user.password %></p>
+        </div>
+        <% }); %>
+        </div>
+    </div>
+    <% if (userEdit) { %>
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-header">
+                Edit user
+            </div>
+            <div class="card-body">
+                <form action="/update-user" method="post">
+                    <input type="hidden" name="_id" value="<%= userEdit._id %>">
+                    <div class="form-group">
+                        <input type="email" class="form-control" name="email" value="<%= userEdit.email %>">
+                    </div>
+                    <div class="form-group">
+                        <input type="password" class="form-control" name="password" placeholder="New password">
+                    </div>
+                    <button type="submit" class="btn btn-outline-primary ">Update user</button>
+                    <a href="/users" class="btn btn-outline-danger ">Cancel</a>
+                </form>
+            </div>
+        </div>
+    </div>
+    <% } %>
+</div>
